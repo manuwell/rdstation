@@ -4,6 +4,7 @@ gem 'rake'
 gem 'puma'
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-activerecord'
 gem 'activerecord'
 gem 'pg'
 
