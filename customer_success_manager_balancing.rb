@@ -2,10 +2,13 @@ require 'minitest/autorun'
 require 'timeout'
 
 class CustomerSuccessManagersBalancing
+  attr_reader :cs_managers, :customers, :cs_managers_away, :cs_managers_acc
+
   def initialize(cs_managers, customers, cs_managers_away)
     @cs_managers = cs_managers
     @customers = customers
     @cs_managers_away = cs_managers_away
+    @cs_managers_acc = {}
   end
 
   # Returns the id of the CustomerSuccessManagersBalancing with the most customers
@@ -17,7 +20,7 @@ end
 
 class CustomerSuccessManagersBalancingTests < Minitest::Test
   def test_scenario_one
-    css = [
+    cs_managers = [
       { id: 1, score: 60 },
       { id: 2, score: 20 },
       { id: 3, score: 95 },
@@ -32,14 +35,14 @@ class CustomerSuccessManagersBalancingTests < Minitest::Test
       { id: 6, score: 10}
     ]
 
-    balancer = CustomerSuccessManagersBalancing.new(css, customers, [2, 4])
+    balancer = CustomerSuccessManagersBalancing.new(cs_managers, customers, [2, 4])
     assert_equal 1, balancer.execute
   end
 
   def test_scenario_two
-    css = array_to_map([11, 21, 31, 3, 4, 5])
+    cs_managers = array_to_map([11, 21, 31, 3, 4, 5])
     customers = array_to_map( [10, 10, 10, 20, 20, 30, 30, 30, 20, 60])
-    balancer = CustomerSuccessManagersBalancing.new(css, customers, [])
+    balancer = CustomerSuccessManagersBalancing.new(cs_managers, customers, [])
     assert_equal 0, balancer.execute
   end
 
