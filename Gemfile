@@ -4,6 +4,7 @@ gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'activerecord'
+gem 'pg'
 
 group :test do
     gem 'minitest'
