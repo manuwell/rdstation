@@ -15,5 +15,8 @@ ActiveRecord::Base.establish_connection(
   url:     ENV.fetch('DATABASE_URL')
 )
 
+def logger
+  @logger ||= Logger.new('tmp/development.log')
+end
 
 require_relative '../lib/cs_managers'
