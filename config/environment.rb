@@ -1,6 +1,12 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require(:default, ENV.fetch('APP_ENV', 'development'))
+APP_ENV = ENV.fetch('RACK_ENV', 'development').freeze
+
+Bundler.require(:default, APP_ENV)
+
+if APP_ENV != 'development'
+  require 'dotenv/load'
+end
 
 require_relative '../lib/cs_managers'
