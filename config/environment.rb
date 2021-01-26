@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+require 'fileutils'
 
 APP_ENV = ENV.fetch('RACK_ENV', 'development').freeze
 Bundler.require(:default, APP_ENV)
@@ -16,7 +17,13 @@ ActiveRecord::Base.establish_connection(
 )
 
 def logger
-  @logger ||= Logger.new('tmp/development.log')
+  @logger ||= if APP_ENV == 'production'
+                Logger.new(STDOUT)
+              else
+                filepath = "logs/#{APP_ENV}.log"
+                FileUtils.touch(filepath) if !File.exist?(filepath)
+                Logger.new(filepath)
+              end
 end
 
 require_relative '../lib/cs_managers'
