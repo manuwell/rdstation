@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'puma'
 gem 'sinatra'
-gem 'sinatra-contrib'
-gem 'sinatra-activerecord'
+gem 'sinatra-contrib', require: false
+gem 'sinatra-activerecord', require: false
 gem 'activerecord'
 gem 'pg'
 
