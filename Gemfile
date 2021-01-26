@@ -8,6 +8,7 @@ gem 'sinatra-contrib', require: false
 gem 'sinatra-activerecord', require: false
 gem 'activerecord'
 gem 'pg'
+gem 'dry-validation'
 
 group :test do
     gem 'minitest'
