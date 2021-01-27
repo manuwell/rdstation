@@ -10,6 +10,7 @@ end
 
 desc 'Run all tests'
 Rake::TestTask.new(:test) do |t|
+  t.libs << "config"
   t.libs << "lib"
   t.libs << "test"
   t.test_files = FileList["test/**/*_test.rb"]
