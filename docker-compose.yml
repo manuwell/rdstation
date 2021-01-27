@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  api:
+    image: cs-managers:development
+    environment:
+      - .env.compose-api
+    build:
+      context: .
+    ports:
+      - 3000:80
+    command: bin/start-api.sh
+    depends_on:
+      - postgres
+      - redis
+
   postgres:
     image: postgres:13-alpine
     ports:
