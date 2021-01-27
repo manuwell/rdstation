@@ -9,6 +9,8 @@ gem 'sinatra-activerecord', require: false
 gem 'activerecord'
 gem 'pg'
 gem 'dry-validation'
+gem 'sidekiq'
+gem 'sidekiq-cron'
 
 group :test do
     gem 'minitest'
