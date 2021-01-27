@@ -6,16 +6,16 @@ module Web::Api::V1::Customers
     CustomerSerializer = Serializers::Api::V1::CustomerSerializer
 
     class CreateCustomerSchema < ::Dry::Validation::Contract
-      params do
+      json do
         required(:name).value(:string)
         required(:score).value(:integer)
       end
     end
 
     post '/api/v1/customers' do
-      result = CreateCustomerSchema.new.call(params)
+      result = CreateCustomerSchema.new.call(json_params)
       if result.errors.any?
-        json_error_response(400, result.errors)
+        json_error_response(400, result.errors.to_h)
         return
       end
 

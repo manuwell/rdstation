@@ -23,7 +23,7 @@ class Web::Api::V1::Customers::CreateTest < Minitest::Test
   def test_creation_with_valid_params
     params = valid_params
 
-    post '/api/v1/customers', valid_params
+    post '/api/v1/customers', valid_params.to_json
 
     assert last_response.created?
     parsed_body = parse_last_response_body
@@ -39,21 +39,21 @@ class Web::Api::V1::Customers::CreateTest < Minitest::Test
   def test_failure_for_invalid_data
     invalid_params = {}
 
-    post '/api/v1/customers', invalid_params
+    post '/api/v1/customers', invalid_params.to_json
 
     assert last_response.bad_request?
     parsed_body = parse_last_response_body
 
     assert parsed_body['result'] == 'failure'
     assert parsed_body['request_id'].present?
-    assert_equal 1, parsed_body['messages'].count
+    assert_equal 2, parsed_body['messages'].count
   end
 
   def test_failure_for_data_out_of_business
     invalid_params = valid_params
     invalid_params[:score] = 10000 # exceeds the limit
 
-    post '/api/v1/customers', invalid_params
+    post '/api/v1/customers', invalid_params.to_json
 
     assert last_response.unprocessable?
     parsed_body = parse_last_response_body

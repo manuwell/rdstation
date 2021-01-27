@@ -19,6 +19,10 @@ class Web::Api::V1::Base < Sinatra::Base
 
   protected
 
+  def json_params
+    JSON.parse(request.body.read) rescue {}
+  end
+
   def json_error_response(status_code, errors)
     halt status_code, json_response_body(:failure, errors, nil)
   end
